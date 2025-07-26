@@ -36,4 +36,22 @@ Simulate a basic enterprise network with log sources, an attacker, and a SIEM sy
 - OS: Kali Linux
 - ova downloaded
 
+## Setting Up
+
+### SIEM-Server Splunk Install
+
+I used `wget` to download the .deb package on my Ubuntu Server.
+```bash
+wget -O splunk.deb "I didn't keep the link"
+sudo dpkg -i splunk.deb
+```
+After that I accepted the splunk license & started splunk with:
+```bash
+sudo /opt/splunk/bin/splunk start --accept-license
+```
+and then I set admin credentials.
+Lastly, I enabled splunk to start at boot:
+```bash
+sudo /opt/splunk/bin/splunk enable boot-start
+```
 
