@@ -156,3 +156,4 @@ sudo ifup eth0
 
 To check if it works just use `ip a` and `ping` just like I did before.
 
+Finally, we can access Splunk from our host machine but using the link `http://192.168.56.10:8000/` and the credentials we set.
