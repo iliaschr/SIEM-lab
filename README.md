@@ -14,8 +14,17 @@ Simulate a basic enterprise network with log sources, an attacker, and a SIEM sy
 ## VM Configuration
 
 ### Victim-Win
+- OS: Windows 10
 - RAM: `4 GB`
 - DISK: `60 GB`
 - CPU Cores: `2`
 - Notes: TBA
 - Problems faced: Windows cannot read the ProductKey [solution](https://www.reddit.com/r/virtualbox/comments/1c1o605/error_installing_windows_windows_cannot_read_the/)
+
+### SIEM-Server
+- OS: Ubuntu Server 22.04 LTS
+- RAM: `8 GB`
+- DISK: `100 GB`
+- CPU Cores: `4`
+- Notes: TBA
+
