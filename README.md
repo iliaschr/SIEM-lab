@@ -28,3 +28,8 @@ Simulate a basic enterprise network with log sources, an attacker, and a SIEM sy
 - CPU Cores: `4`
 - Notes: TBA
 
+### Attacker-Kali
+- OS: Kali Linux
+- ova downloaded
+
+
