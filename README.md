@@ -114,7 +114,7 @@ And check with `ip a` that everything is ok.
 
 Let's go back to the `Victim-Win` VM to set a static IP.
 
-### Set Static IP on Windows 10 VM
+#### Set Static IP on Windows 10 VM
 
 Here we can just open the `Control Panel` > `Network and Sharing Center`. Click on `Ethernet` and `Properties`. Select `Internet Protocol Version 4 (TCP/IPv4)` > Click `Properties`.
 Set:
@@ -126,3 +126,33 @@ Set:
 
 To check if it works just do: `ping 192.168.56.10`
 (I will add a screenshot here later example_ping.png)
+
+#### Set Static IP on Attacker-Kali
+
+Keep in mind I've enabled a second NAT adapter.
+I just edited the file `/etc/network/interfaces` and added these line
+```bash
+# loopback
+auto lo
+iface lo inet loopback
+
+# Host-Only interface (no gateway)
+auto eth0
+iface eth0 inet static
+  address 192.168.56.30
+  netmask 255.255.255.0
+  dns-nameservers 8.8.8.8
+
+# NAT interface (for internet)
+allow-hotplug eth1
+iface eth1 inet dhcp
+```
+
+After that just do
+```bash
+sudo ifdown eth0 || true
+sudo ifup eth0
+```
+
+To check if it works just use `ip a` and `ping` just like I did before.
+
