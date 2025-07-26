@@ -168,9 +168,9 @@ Sysmon64 -accepteula -i sysmonconfig.xml
 
 I just used `sysmonconfig.xml` file that I found on github by SwiftOnSecurity
 
-### winlogbeats Setup
+### winlogbeat Setup
 
-In the `winlogbeats.yml` file comment out `setup.kibana` and `output.elasticsearch` we will be adding our own things:
+In the `winlogbeat.yml` file comment out `setup.kibana` and `output.elasticsearch` we will be adding our own things:
 ```yaml
 output.elasticsearch:
   host: ["https://192.168.56.10:8088"]
@@ -187,9 +187,9 @@ queue.mem:
   flush.timeout: 5s
 ```
 
-Install Winlogbeats as a service and Start it.
+Install Winlogbeat as a service and Start it.
 ```ps1
-.\install-service-winlogbeats.ps1
+.\install-service-winlogbeat.ps1
 Start-Service winlogbeat
 ```
 
