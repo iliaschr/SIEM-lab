@@ -22,7 +22,7 @@ Simulate a basic enterprise network with log sources, an attacker, and a SIEM sy
 - Problems faced: Windows cannot read the ProductKey [solution](https://www.reddit.com/r/virtualbox/comments/1c1o605/error_installing_windows_windows_cannot_read_the/)
 
 ### SIEM-Server
-- OS: Ubuntu Server 22.04 LTS
+- OS: Ubuntu Server 24.04 LTS
 - RAM: `8 GB`
 - DISK: `100 GB`
 - CPU Cores: `4`
@@ -85,5 +85,31 @@ Do this for every VM (Attacker-Kali, Victim-Win and SIEM-Server).
 | Attacker-Kali | `192.168.56.30` | Attack Simulator | Kali Linux    |
 | Host Machine  | `192.168.56.1`  | Network Gateway  | (VirtualBox)  |
 
+#### Set Static IP on Ubuntu Server
+
+Now I have to find and edit the netplan config:
+```bash
+ls /etc/netplan/
+sudo vim /etc/netplan/50-cloud-init.yaml
+```
+I changed it to (also I enable a second NAT adapter):
+```yaml
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      addresses: [192.168.56.10/24]
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
+
+    enp0s8:
+      dhcp4: true
+```
+Now run: 
+```bash
+sudo netplan apply
+```
+And check with `ip a` that everything is ok.
 
 
