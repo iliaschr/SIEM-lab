@@ -112,4 +112,17 @@ sudo netplan apply
 ```
 And check with `ip a` that everything is ok.
 
+Let's go back to the `Victim-Win` VM to set a static IP.
 
+### Set Static IP on Windows 10 VM
+
+Here we can just open the `Control Panel` > `Network and Sharing Center`. Click on `Ethernet` and `Properties`. Select `Internet Protocol Version 4 (TCP/IPv4)` > Click `Properties`.
+Set:
+- IP: 192.168.56.20
+- Subnet: 255.255.255.0
+- Gateway: 192.168.56.1
+- DNS: 8.8.8.8
+(I will add a screenshot here later)
+
+To check if it works just do: `ping 192.168.56.10`
+(I will add a screenshot here later example_ping.png)
