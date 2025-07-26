@@ -18,3 +18,4 @@ Simulate a basic enterprise network with log sources, an attacker, and a SIEM sy
 - DISK: `60 GB`
 - CPU Cores: `2`
 - Notes: TBA
+- Problems faced: Windows cannot read the ProductKey [solution](https://www.reddit.com/r/virtualbox/comments/1c1o605/error_installing_windows_windows_cannot_read_the/)
