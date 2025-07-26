@@ -55,3 +55,11 @@ Lastly, I enabled splunk to start at boot:
 sudo /opt/splunk/bin/splunk enable boot-start
 ```
 
+### Victim-Win `gpedit.msc`
+
+I pressed `Win + R` typed `gpedit.msc` and went to:
+Computer Configuration → Administrative Templates → Windows Components → Windows PowerShell
+After that I enabled `Turn on Module Logging` and `Turn on PowerShell Script Block Logging`.
+I also downloaded `Sysmon` and `Winlogbeat`.
+
+
