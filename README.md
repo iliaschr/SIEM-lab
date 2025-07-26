@@ -62,4 +62,6 @@ Computer Configuration → Administrative Templates → Windows Components → W
 After that I enabled `Turn on Module Logging` and `Turn on PowerShell Script Block Logging`.
 I also downloaded `Sysmon` and `Winlogbeat`.
 
+### Attacker-Kali
 
+Just made sure all the things I need were there.
