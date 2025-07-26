@@ -157,3 +157,47 @@ sudo ifup eth0
 To check if it works just use `ip a` and `ping` just like I did before.
 
 Finally, we can access Splunk from our host machine but using the link `http://192.168.56.10:8000/` and the credentials we set.
+
+### Sysmon64 Setup
+
+```ps1
+Sysmon64 -accepteula -i sysmonconfig.xml
+```
+
+I just used `sysmonconfig.xml` file that I found on github by SwiftOnSecurity
+
+### winlogbeats Setup
+
+In the `winlogbeats.yml` file comment out `setup.kibana` and `output.elasticsearch` we will be adding our own things:
+```yaml
+output.elasticsearch:
+  host: ["https://192.168.56.10:8088"]
+  protocol: "https"
+  path: "/services/collector/event"
+  headers:
+    Authorization: "the token we will generate in a bit"
+    Content-Type: "application/json"
+  ssl.verification_mode: none
+
+queue.mem:
+  events: 4096
+  flush.min_events: 512
+  flush.timeout: 5s
+```
+
+Install Winlogbeats as a service and Start it.
+```ps1
+.\install-service-winlogbeats.ps1
+Start-Service winlogbeat
+```
+
+Test network connectivity to Splunk server
+```ps1
+Test-NetConnection -ComputerName 192.168.56.10 -Port 8088
+```
+
+### Adding a Token 
+
+To get your token you click in Splunk `Settings` > `Data Inputs` > `HTTP Event Collector`. Make sure in global settings `All Tokens` is `Enabled` for this lab.
+And then you just `Add token` and follow the steps.
+
