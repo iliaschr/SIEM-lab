@@ -12,3 +12,9 @@ Simulate a basic enterprise network with log sources, an attacker, and a SIEM sy
 - **Attacker-Kali**: Kali Linux VM used for simulating attacks
 
 ## VM Configuration
+
+### Victim-Win
+- RAM: `4 GB`
+- DISK: `60 GB`
+- CPU Cores: `2`
+- Notes: TBA
