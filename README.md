@@ -27,6 +27,10 @@ Simulate a basic enterprise network with log sources, an attacker, and a SIEM sy
 - DISK: `100 GB`
 - CPU Cores: `4`
 - Notes: TBA
+- Installed packages:
+  - curl, wget, vim, net-tools
+  - openssh-server
+  - ufw (Uncomplicated Firewall)
 
 ### Attacker-Kali
 - OS: Kali Linux
