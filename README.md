@@ -65,3 +65,25 @@ I also downloaded `Sysmon` and `Winlogbeat`.
 ### Attacker-Kali
 
 Just made sure all the things I need were there.
+
+## Creating Host-Only Network in VirtualBox
+
+Click `File` → `Tool` → `Network Manager`. Now, click create and leave DHCP disabled.
+
+### Assign Host-Only Adapter to Each VM
+
+Open VM Settings and go to `Network`.
+The settings should look like this: (I will place screenshots later)
+Do this for every VM (Attacker-Kali, Victim-Win and SIEM-Server).
+
+### Static IP Plan
+
+| VM Name       | IP Address      | Role             | OS            |
+| ------------- | --------------- | ---------------- | ------------- |
+| SIEM-Server   | `192.168.56.10` | Splunk Server    | Ubuntu Server |
+| Victim-Win    | `192.168.56.20` | Target Machine   | Windows 10    |
+| Attacker-Kali | `192.168.56.30` | Attack Simulator | Kali Linux    |
+| Host Machine  | `192.168.56.1`  | Network Gateway  | (VirtualBox)  |
+
+
+
