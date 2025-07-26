@@ -73,7 +73,8 @@ Click `File` → `Tool` → `Network Manager`. Now, click create and leave DHCP 
 ### Assign Host-Only Adapter to Each VM
 
 Open VM Settings and go to `Network`.
-The settings should look like this: (I will place screenshots later)
+The settings should look like this: 
+<img title="Host-Only Adapter" alt="Host-Only Settings" src="/images/host-only.png">
 Do this for every VM (Attacker-Kali, Victim-Win and SIEM-Server).
 
 ### Static IP Plan
@@ -122,10 +123,11 @@ Set:
 - Subnet: 255.255.255.0
 - Gateway: 192.168.56.1
 - DNS: 8.8.8.8
-(I will add a screenshot here later)
+<img title="Windows IP Settings" alt="Windows-Static-IP" src="/images/win-static-ip.png">
 
 To check if it works just do: `ping 192.168.56.10`
-(I will add a screenshot here later example_ping.png)
+<img title="Example Ping" alt="Example-Ping-Image" src="/images/example_ping.png">
+
 
 #### Set Static IP on Attacker-Kali
 
