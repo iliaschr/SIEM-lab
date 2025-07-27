@@ -230,4 +230,28 @@ disabled = 0
 renderXml = 1
 ```
 
-To check if it's working in the Splunk UI on our host machine we can search `index="*" host="192.168.56.20" source="WinEventLog:Microsoft-Windows-Sysmon/Operational"`.
+After that we still won't be seeing sysmon events in Splunk... to fix that we need to change the
+service to run as `LocalSystem`. You can check what it is running as by running this command
+```ps1
+Get-WmiObject Win32_Service -Filter "Name='SplunkForwarder'" | Select-Object Name, StartName
+```
+
+In the `scripts` folder of this repository I added a [script](/scripts/localsys_splunkuf.ps1) file that fixes this
+problem. I suggest you only use it in a similar situation where you are just testing it on a VM.
+This is a <b>Lab setup, not production</b>. I haven't worked in real production enviroments yet,
+but I can tell it's a bad idea to set this up as `LocalSystem` on a machine that accesses the internet.
+
+Some things you might need to install are:
+1. Splunk for Sysmon
+2. Splunk for Microsoft Windows
+You can find them in Splunk by clicking `Apps` > `Find More Apps`.
+
+To check if it's working in the Splunk UI on our host machine we can search `index=* host="192.168.56.20" sourcetype="XmlWinEventLog"`.
+Lab setup, not production</b>. I haven't worked in real production enviroments yet,
+but I can tell it's a bad idea to set this up as `LocalSystem` on a machine that accesses the internet.
+
+Some things you might need to install are:
+1. Splunk for Sysmon
+2. Splunk for Microsoft Windows
+You can find them in Splunk by clicking `Apps` > `Find More Apps`.
+
