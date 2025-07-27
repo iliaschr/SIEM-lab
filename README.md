@@ -60,7 +60,7 @@ sudo /opt/splunk/bin/splunk enable boot-start
 I pressed `Win + R` typed `gpedit.msc` and went to:
 Computer Configuration → Administrative Templates → Windows Components → Windows PowerShell
 After that I enabled `Turn on Module Logging` and `Turn on PowerShell Script Block Logging`.
-I also downloaded `Sysmon` and `Winlogbeat`.
+I also downloaded `Sysmon`.
 
 ### Attacker-Kali
 
@@ -168,38 +168,31 @@ Sysmon64 -accepteula -i sysmonconfig.xml
 
 I just used `sysmonconfig.xml` file that I found on github by SwiftOnSecurity
 
-### winlogbeat Setup
 
-In the `winlogbeat.yml` file comment out `setup.kibana` and `output.elasticsearch` we will be adding our own things:
-```yaml
-output.elasticsearch:
-  host: ["https://192.168.56.10:8088"]
-  protocol: "https"
-  path: "/services/collector/event"
-  headers:
-    Authorization: "the token we will generate in a bit"
-    Content-Type: "application/json"
-  ssl.verification_mode: none
+## Using Splunk UF
 
-queue.mem:
-  events: 4096
-  flush.min_events: 512
-  flush.timeout: 5s
+Now we have to install Splunk Universal Forwarder.
+The only thing we have to watch out for during the setup is to configure the receiving indexer properly with `192.168.56.10` and port `9997`.
+<img title="Receiving Indexer" alt="Image here" src="/images/Receiving_Indexer.png">
+After that we go to Splunk UI on our Host Machine and then `Settings` > `Forwarding and Receiving` > `Configure Receiving` and add port `9997`.
+<img title="Configure-receive" alt="Image here" src="/images/configure-receiving.png">
+
+Now if we run on SIEM-Server:
+```bash
+sudo netstat -tulnp | grep 9997
 ```
-
-Install Winlogbeat as a service and Start it.
-```ps1
-.\install-service-winlogbeat.ps1
-Start-Service winlogbeat
+we should get an output that looks like this:
+```bash
+tcp        0      0 0.0.0.0:9997       0.0.0.0:*       LISTEN      <splunk_pid>/splunkd
 ```
-
-Test network connectivity to Splunk server
-```ps1
-Test-NetConnection -ComputerName 192.168.56.10 -Port 8088
+Another way to see if everything is working is to run:
+```bash 
+sudo netstat -an | grep 9997
 ```
+You should see our Victim-Win IP and SIEM-Server IP and `ESTABLISHED`.
 
-### Adding a Token 
+Also, you can check on Victim-Win by pressing `Win` + `R` and searching for `services.msc` if you see `SplunkForwarder` and `Running`:
+<img title="SplunkUF Runniong" alt="image here" src="/images/splunk_uf_running.png">
 
-To get your token you click in Splunk `Settings` > `Data Inputs` > `HTTP Event Collector`. Make sure in global settings `All Tokens` is `Enabled` for this lab.
-And then you just `Add token` and follow the steps.
+
 
