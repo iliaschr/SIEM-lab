@@ -75,6 +75,7 @@ Click `File` → `Tool` → `Network Manager`. Now, click create and leave DHCP 
 Open VM Settings and go to `Network`.
 The settings should look like this: 
 <img title="Host-Only Adapter" alt="Host-Only Settings" src="/images/host-only.png">
+
 Do this for every VM (Attacker-Kali, Victim-Win and SIEM-Server).
 
 ### Static IP Plan
@@ -126,6 +127,7 @@ Set:
 <img title="Windows IP Settings" alt="Windows-Static-IP" src="/images/win-static-ip.png">
 
 To check if it works just do: `ping 192.168.56.10`
+
 <img title="Example Ping" alt="Example-Ping-Image" src="/images/example_ping.png">
 
 
