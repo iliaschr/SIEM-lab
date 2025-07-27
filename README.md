@@ -219,4 +219,4 @@ And after all that it wasn't working... but I found the solution...
 
 Now if we go to Splunk UI on our machine and search `index="*" host="192.168.56.20"` we should see it working.
 
-<img title="Splunk Working" alt="Image here" src="/images/Splunk-working.png">
+<img title="Splunk Working" alt="Image here" src="/images/Splunk_working.png">
