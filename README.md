@@ -173,9 +173,12 @@ I just used `sysmonconfig.xml` file that I found on github by SwiftOnSecurity
 
 Now we have to install Splunk Universal Forwarder.
 The only thing we have to watch out for during the setup is to configure the receiving indexer properly with `192.168.56.10` and port `9997`.
+
 <img title="Receiving Indexer" alt="Image here" src="/images/Receiving_Indexer.png">
+
 After that we go to Splunk UI on our Host Machine and then `Settings` > `Forwarding and Receiving` > `Configure Receiving` and add port `9997`.
-<img title="Configure-receive" alt="Image here" src="/images/configure-receiving.png">
+
+<img title="Configure-receive" alt="Image here" src="/images/configure_receiving.png">
 
 Now if we run on SIEM-Server:
 ```bash
