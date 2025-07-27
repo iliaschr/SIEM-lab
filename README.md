@@ -227,3 +227,5 @@ Let's add `Sysmon` to our `input.conf` file:
 disabled = 0
 renderXml = 1
 ```
+
+To check if it's working in the Splunk UI on our host machine we can search `index="*" host="192.168.56.20" source="WinEventLog:Microsoft-Windows-Sysmon/Operational"`.
