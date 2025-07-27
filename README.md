@@ -198,4 +198,25 @@ Also, you can check on Victim-Win by pressing `Win` + `R` and searching for `ser
 <img title="SplunkUF Runniong" alt="image here" src="/images/splunk_uf_running.png">
 
 
+And after all that it wasn't working... but I found the solution... 
+1. Go to `C:\Program Files\SplunkUniversalForwarder\etc\system\local`
+2. If there is no `input.conf` file then create one
+3. Add this inside
+  ```conf
+  [default]
+  host = 192.168.56.20
+  
+  [WinEventLog://System]
+  disabled = 0
+  
+  [WinEventLog://Security]
+  disabled = 0
+  
+  [WinEventLog://Application]
+  disabled = 0
+  ```
+4. Restart the service (there is usually a problem with restarting the service `Restart-Service Splunk...` you should just Stop the Service and then Start it with `Start-Service`.)
 
+Now if we go to Splunk UI on our machine and search `index="*" host="192.168.56.20"` we should see it working.
+
+<img title="Splunk Working" alt="Image here" src="/images/Splunk-working.png">
