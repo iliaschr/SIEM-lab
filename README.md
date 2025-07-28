@@ -253,5 +253,65 @@ but I can tell it's a bad idea to set this up as `LocalSystem` on a machine that
 Some things you might need to install are:
 1. Splunk for Sysmon
 2. Splunk for Microsoft Windows
+3. Splunk Universal Forwarder Extension
 You can find them in Splunk by clicking `Apps` > `Find More Apps`.
+
+### Setting Up `winlogs` Index In Splunk
+
+This is optional but very useful. If you go in the Splunk UI to `Indexes` and add a new one called `winlogs` you can specify it in your `input.conf` file.
+This is what I did to my file: 
+```
+[WinEventLog://Security]
+disabled = 0
+index = winlogs
+
+[WinEventLog://Microsoft-Windows-Sysmon/Operational]
+disabled = 0
+index = winlogs
+```
+
+#### Creating Table `index=winlogs host=Victim-Win`
+
+This is optional too. Just search `index=winlogs host=Victim-Win`, you need to have the `winlogs` index and then create a `Table`. 
+This is a List of the most essential fields.
+
+Core Event Fields:
+
+ - `_time` - Timestamp (essential for timeline analysis)
+ - `EventID` - Sysmon event type identifier
+ - `Computer` or `ComputerName` - Source system
+ - `host` - Splunk host field
+
+Process Activity Fields:
+
+  - `Image` - Process executable path
+  - `ProcessId` - Process identifier
+  - `ProcessGuid` - Unique process identifier
+  - `CommandLine` - Full command line executed
+  - `ParentImage` - Parent process executable
+  - `ParentProcessId` - Parent process identifier
+  - `User` - User context
+
+File/Registry Activity:
+
+  - `TargetObject` - Registry operations target
+  - `Details` - Additional event details
+
+Network Activity:
+
+  - `SourceIp` / `src_ip` - Source IP address
+  - `DestinationIp` / `dest_ip` - Destination IP address
+  - `SourcePort` / `src_port` - Source port
+  - `DestinationPort` / `dest_port` - Destination port
+  - `Protocol` - Network protocol
+
+Hash/Security Fields:
+
+  - `Hashes` - File hashes (MD5, SHA256, etc.)
+  - `IntegrityLevel` - Process integrity level
+
+Additional Context:
+
+  - `RuleName` - Sysmon rule that triggered
+  - `UtcTime` - UTC timestamp from Sysmon
 
