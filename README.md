@@ -356,7 +356,7 @@ After a quick google search I found that there are no known exploits but it can 
 
 ### Getting PID
 
-Inside of `scripts`, I have a file called `payload.c` this program sends the PID to `Attacker-Kali` when run.
+Inside of `scripts`, I have a file called `pid_sender.c` this program sends the PID to `Attacker-Kali` when run.
 #### Attacker-Kali Commands
 To run this you have to compile it with `x86_64-w64-mingw32-gcc pid_sender.c -o pid_sender.exe -lwininet`, we use the cross-compiler for Windows 64-bit systems.
 After that we can start a simple HTTP Server with this command `python3 -m http.server 80`. In another terminal run a listener by using this command `nc -lvnp 9000`.
