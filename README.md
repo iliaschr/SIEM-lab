@@ -393,7 +393,11 @@ Cache-Control: no-cache
 
 And in Splunk we see this !.. :
 
-I will add screenshots here
-pid_sender.png
-dataset_1.png
-dataset_2.png
+In the search:
+
+<img title="Pid_sender.exe" alt="Image here" src="/images/pid_sender.png">
+
+In the dataset:
+<img title="Pid_sender.exe" alt="Image here" src="/images/dataset_1.png">
+<img title="Pid_sender.exe" alt="Image here" src="/images/dataset_2.png">
+
