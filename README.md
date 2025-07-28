@@ -319,28 +319,28 @@ Additional Context:
 
 Let's start by scanning the network we will use this command `nmap -sP 192.168.56.0/24`:
 
-siem_nmap_network_scan.png (screenshot place here)
+<img title="SIEM Nmap Network scan" alt="Image here" src="/images/siem_nmap_network_scan.png">
 
 As we can see all machines show up.
 I won't be attacking SIEM-Server (probably).
 
 Now let's scan for open ports. Quick reminder our firewall is up and we haven't opened any ports yet. We will use the command `nmap -sS -p- 192.168.56.20`.
 
-nmap_SYN_scan.png (screenshot place here)
+<img title="nmap SYN scan" alt="Image here" src="/images/nmap_SYN_scan.png">
 
 And we found an open port! `7680` running `pando-pub` service. 
 Now let's do a version scan:
 
-7680_port_scan_version.png (screenshot place here!!)
+<img title="nmap Version scan" alt="Image here" src="/images/7680_port_scan_version.png">
 
 The service version detection shows pando-pub? with a question mark, meaning nmap couldn't definitively identify the service version or get a proper banner response.
 Now a script scan:
 
-7680_port_scan_script.png (screenshot)
+<img title="nmap Script scan" alt="Image here" src="/images/7680_port_scan_script.png">
 
 Ok let's try something else.. `telnet 192.168.56.20 7680`:
 
-telnet_connection.png (screenshot)
+<img title="Telnet connection" alt="Image here" src="/images/telnet_connection.png">
 
 Service Behavior:
  - Accepts connections but doesn't respond to any commands
@@ -350,6 +350,6 @@ Service Behavior:
 
 After that I tried spamming the command `python3 -c "print('A' * 10)" | nc 192.168.56.20 7680`:
 
-nc_spam.png (screenshot here)
+<img title="nc spam" alt="Image here" src="/images/nc_spam.png">
 
 After a quick google search I found that there are no known exploits but it can be misidentified as a `Pando Media Booster`.
