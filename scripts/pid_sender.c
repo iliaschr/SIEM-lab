@@ -1,5 +1,6 @@
 #include <windows.h>    // For Windows API functions like GetCurrentProcessId()
 #include <wininet.h>    // For Internet functions: InternetOpen, InternetOpenUrl, etc.
+#include <stdio.h>
 
 #pragma comment(lib, "wininet.lib")  // Link with WinINet library at compile time
 
